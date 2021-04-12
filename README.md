@@ -2,18 +2,14 @@
 
 ## Index
 * [Project Requirement](#project-requirement)
-* [Development Starting Point and Framework](#development-starting-point-and-framework)
+* [Business Rules](#development-starting-point-and-framework)
 * [Business Rules and Assumptions](#business-rules-and-assumptions)
-* [Web UI](#web-ui)
 * [EERD](#eerd)
-* [Data Dictionary](#data-distionary)
 * [SQL Implementation Details](#sql-implementation-details)
-	* [Stored Procedure](#stored-procedure)
-	* [Trigger](#trigger)
-	* [View](#view)
 	* [Indexes](#indexes)
-* [ToDo(Future Work)](#todo)
-* [References](#references)
+	* [View](#view)
+	* [Trigger](#trigger)
+	* [Stored Procedure](#stored-procedure)
 
 ## Project Requirement
 In this project, we are responsible for the addition of a rating system for following the business rules for both drivers and restaurants. Some detailed requirements are as follows:
@@ -41,6 +37,10 @@ b.	All delivery personnel are students.
 5)	Food providers or restaurants have to be approved in order to be included in the database.  You can include ten restaurants or more of your choice for the test database.  Information will include an ID, location, schedule, and a link to the web site along with other attributes you may identify.
 6)	The database will serve as an important data collection source providing valuable information about nutrition and eating habits of campus community members.
 
-
+## EERD
+The original database contains design contains 10 tables. 3 tables are added for the addition of a rating system:
+* `driver_rating` contains 
 
 ![alt text](https://github.com/YikeLi-DS/ITCS-6160-Database-System/blob/main/imgs/EERD.png)
+
+## SQL Implementation Details
