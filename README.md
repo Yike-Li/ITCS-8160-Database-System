@@ -38,8 +38,17 @@ b.	All delivery personnel are students.
 
 ## EERD
 The original database contains design contains 10 tables. 3 tables are added for the addition of a rating system:
-* `driver_rating` contains 
+* `rating` is the supertype table which contains common attributes of the two subtype tables: `driver_rating` and `restaurant_rating`.
+* `driver_rating` table contains the rating info specifically for the drivers
+* `restaurant_rating` table contains the rating info specifically for the restaurants
 
 ![alt text](https://github.com/YikeLi-DS/ITCS-6160-Database-System/blob/main/imgs/EERD.png)
+
+## Generated Data
+Below gives the snapshot of generated data for the `rating` table. 100 records were generated. 
+
+Below gives the snapshot of generated data for the `driver_rating` table. 100 records were generated. 
+
+Below gives the snapshot of generated data for the `restaurant_rating` table. 100 records were generated. 
 
 ## SQL Implementation Details
