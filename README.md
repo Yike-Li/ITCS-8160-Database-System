@@ -42,13 +42,83 @@ The original database contains design contains 10 tables. 3 tables are added for
 * `driver_rating` table contains the rating info specifically for the drivers
 * `restaurant_rating` table contains the rating info specifically for the restaurants
 
-![alt text](https://github.com/YikeLi-DS/ITCS-6160-Database-System/blob/main/imgs/EERD.png)
+<p align="center">
+  <img src="https://github.com/YikeLi-DS/ITCS-6160-Database-System/blob/main/imgs/EERD.png">
+</p>
+
+
 
 ## Generated Data
 Below gives the snapshot of generated data for the `rating` table. 100 records were generated. 
 
+<p align="center">
+  <img src="https://github.com/YikeLi-DS/ITCS-6160-Database-System/blob/main/imgs/rating_data.png">
+</p>
+
+
 Below gives the snapshot of generated data for the `driver_rating` table. 100 records were generated. 
+<p align="center">
+  <img src="https://github.com/YikeLi-DS/ITCS-6160-Database-System/blob/main/imgs/driver_rating_data.png">
+</p>
 
 Below gives the snapshot of generated data for the `restaurant_rating` table. 100 records were generated. 
+<p align="center">
+  <img src="https://github.com/YikeLi-DS/ITCS-6160-Database-System/blob/main/imgs/restaurant_rating_data.png">
+</p>
 
 ## SQL Implementation Details
+### Indexes
+Three covering indexes were added to enhance the query performance.
+```mysql
+CREATE INDEX restaurant_restaurant_id_restaurant_name_ix
+on restaurant (restaurant_id, restaurant_name);
+
+CREATE INDEX restaurant_restaurant_id_location_ix
+on restaurant (restaurant_id, location);
+
+CREATE INDEX location_location_id_location_address_ix
+on location (location_id, location_address);
+
+```
+### View
+Three advanced views were created that include the ratings tables.
+
+`driver_name_rating` view:
+<p align="center">
+<img src="https://user-images.githubusercontent.com/45896443/114463323-46d85a00-9bb2-11eb-9c51-37329e9a38bb.png">
+</p>
+
+`restaurant_name_rating` view:
+<p align="center">
+<img src="https://user-images.githubusercontent.com/45896443/114463333-4c35a480-9bb2-11eb-8fa5-613e71177e87.png">
+</p>
+
+`person_order_rating` view:
+<p align="center">
+<img src="https://user-images.githubusercontent.com/45896443/114463340-4f309500-9bb2-11eb-86e7-20de3f58857d.png">
+</p>
+
+### Trigger
+One trigger was added. The trigger creates a driver_rating_audit table to record actions on the driver_rating table. Two AFTER triggers are created to insert rows into the audit table. 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/45896443/114463273-36c07a80-9bb2-11eb-8fcd-969cf494f21c.png">
+</p>
+
+### Stored Procedure
+A routine procedure was created to add new person's name.
+```mysql
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_person`(in person_name varchar(300), in email varchar(150), cellno bigint (15), person_type varchar(10))
+BEGIN
+insert into person (person_name, person_email, cell) values(person_name, email, cellno);
+if(person_type = 'student') then
+insert into student (person_id, graduation_year, major, type) values 
+((select person_id from person where cell = cellno), 2019, 'Computer Science', 'Graduate');
+elseif(person_type = 'faculty') then
+insert into faculty (person_id, title, degree_college, highest_degree) values 
+((select person_id from person where cell = cellno), 'Assistant Professor', 'UCLA', 'PhD');
+elseif(person_type = 'staff') then
+insert into student (person_id, position, is_admin) values 
+((select person_id from person where cell = cellno), 'Bus Driver', 'N');
+end if;
+END
+```
