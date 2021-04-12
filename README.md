@@ -2,8 +2,7 @@
 
 ## Index
 * [Project Requirement](#project-requirement)
-* [Business Rules](#development-starting-point-and-framework)
-* [Business Rules and Assumptions](#business-rules-and-assumptions)
+* [Business Rules](#business-rules)
 * [EERD](#eerd)
 * [SQL Implementation Details](#sql-implementation-details)
 	* [Indexes](#indexes)
