@@ -1,4 +1,4 @@
-# ITCS 6160 Campus Eats Project
+# ITCS 8160 Campus Eats Project
 
 ## Index
 * [Project Requirement](#project-requirement)
